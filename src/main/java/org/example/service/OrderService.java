@@ -4,6 +4,7 @@ import org.example.model.Order;
 import org.example.printer.ReceiptPrinter;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -43,7 +44,11 @@ public class OrderService {
 
     private static BigDecimal calculateFinalAmount
             (Order order,BigDecimal discount, BigDecimal commission) {
-        return order.getAmount().subtract(discount).add(commission);
+        return order.getAmount()
+                .subtract(discount)
+                .add(commission)
+                .setScale(1, RoundingMode.HALF_UP);
+
     }
 
 
