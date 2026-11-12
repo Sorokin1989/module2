@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT' 
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClass = 'org.example.Main'
+}
+
+// --- КАСТОМНАЯ ТАСКА ---
+tasks.register('generateBuildInfo') {
+    group = 'build'
+    description = 'Генерирует build-info.txt с версией и датой сборки'
+
+    doLast {
+        def buildInfoFile = file("$buildDir/build-info.txt")
+        buildInfoFile.parentFile.mkdirs()
+
+        def buildDate = new Date().format('yyyy-MM-dd')
+
+        buildInfoFile.text = """Version: ${project.version}
+Build date: ${buildDate}
+"""
+        println "Generated: $buildInfoFile"
+    }
+}
+
+tasks.named('build') {
+    dependsOn 'generateBuildInfo'
+}
