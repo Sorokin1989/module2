@@ -14,6 +14,7 @@ public enum CustomerType {
     PREMIUM(new PremiumDiscount());
 
     private final DiscountStrategy discountStrategy;
+
     CustomerType(DiscountStrategy discountStrategy) {
         this.discountStrategy = discountStrategy;
     }

@@ -3,7 +3,7 @@ package org.example;
 import org.example.enums.CustomerType;
 import org.example.enums.PaymentType;
 import org.example.model.Order;
-import org.example.printer.ReceiptPrinter;
+import org.example.printer.ConsoleReceiptPrinter;
 import org.example.service.OrderService;
 
 import java.math.BigDecimal;
@@ -14,7 +14,7 @@ import java.util.List;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        OrderService service = new OrderService(new ArrayList<>(),new ReceiptPrinter());
+        OrderService service = new OrderService(new ArrayList<>(),new ConsoleReceiptPrinter());
 
         Order order1 = new Order("1", CustomerType.VIP,
                 PaymentType.CARD,
